@@ -1,1 +1,9 @@
-<p>movies works!</p>
+<div class="movies">
+    <div *ngFor="let movie of listOfMovies">
+        <p>{{movie.title}}</p>
+        <img width="200"height="288"
+            src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" 
+            alt="poster">
+    </div>
+</div>
+
