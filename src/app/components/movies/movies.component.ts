@@ -18,7 +18,7 @@ export class MoviesComponent implements OnInit {
       .subscribe(
         res => this.listOfMovies = res['results'],
         error => console.error(error),
-        () => console.log("este es el mítico console log ", this.listOfMovies)
+        () => console.log(this.listOfMovies)
       )
   }
 
