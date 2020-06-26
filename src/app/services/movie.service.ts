@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, ObservedValueOf } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,11 @@ export class MovieService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getTrendingMovies():Observable<any>{
+  getTrendingMovies(): Observable<any> {
     return this.httpClient.get(this.apiUrl + 'main/trending')
   }
 
+  getAllGendersMovies(): Observable<any> {
+    return this.httpClient.get(this.apiUrl + '/genders');
+  }
 }
