@@ -27,18 +27,34 @@ export class UserService {
   //SETTERS
 
   //METHODS
-  signIn(userSignIn: IUser): Observable<any> {
-    return this.httpClient.post(this.apiUrl + 'main/signin', userSignIn);
+  signIn(name: string, email: string, password: string, address: string) {
+
+    let body = {
+      name: name,
+      email: email,
+      password: password,
+      address: address
+    };
+
+    return this.httpClient.post(this.apiUrl + 'main/signin', body)
+      .subscribe({
+        next: data => { },
+        error: error => console.log(error)
+      });
   }
 
   logIn(email: string, pwd: string) {
     //recoger el token //REVISAR
-    let body = { email: email, password: pwd };
+    let body = {
+      email: email,
+      password: pwd
+    };
+
     this.httpClient.post<IUserLogin>(this.apiUrl + 'main/login', body)
       .subscribe({
         next: data => {
           this.token = data.token,//NO HACE INSERT en token
-          this.user = data.user
+            this.user = data.user
         },
         error: error => console.log(error)
       });
