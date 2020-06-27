@@ -1,8 +1,8 @@
-export interface User {
+export interface IUser {
     id:number,
     name:string,
     email:string,
     password:string,
     address:string,
-    RoleId:string
+    isAdmin:boolean
 }
