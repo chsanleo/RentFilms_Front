@@ -26,6 +26,7 @@ export class UserService {
 
   //SETTERS
 
+
   //METHODS
   signIn(name: string, email: string, password: string, address: string) {
 
