@@ -38,7 +38,7 @@ export class UserService {
 
     return this.httpClient.post(this.apiUrl + 'main/signin', body)
       .subscribe({
-        next: data => { },
+        next: data => console.log("todo OK"),
         error: error => console.log(error)
       });
   }
