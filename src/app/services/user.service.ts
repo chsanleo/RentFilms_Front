@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../models/user.model';
+import { UserLogin } from '../models/userLogin.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,26 +11,58 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   apiUrl = 'http://localhost:3000/';
+  user: User;
+  token: string;
 
   constructor(private httpClient: HttpClient) { }
 
-  signIn():Observable<any>{
-    return this.httpClient.get(this.apiUrl + 'main/trending')
+  //GETTERS
+  getUser(){
+    return this.user;
+  }
+  getToken(){
+    return this.token;
   }
 
-  logIn():Observable<any>{
-    return ;
+  //SETTERS
+
+
+  //METHODS
+  signIn(userSignIn: User): Observable<any> {
+    return this.httpClient.post(this.apiUrl + 'main/signin', userSignIn);
   }
-  logOut():Observable<any>{
+
+  logIn(userforLogin: User) {
+    //recoger el token //REVISAR
+    let data = this.httpClient.post<UserLogin>(this.apiUrl + 'main/login', userforLogin)
+      .pipe(map(res => <UserLogin>res));
+
+    localStorage.setItem('token', data['token']);
+
+    this.token = data['token'];
+    this.user = data['user'];
+  }
+
+  logOut(): Observable<any> {
+    let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
+    return this.httpClient.get(this.apiUrl + 'main/logout', { headers });
+  }
+  /*
+    getCurrentUser(): Observable<User> {
+      let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
+      return this.httpClient.get(this.apiUrl + 'users/user', { headers }).pipe(map(res=><User>res));
+    }*/
+    
+  getUserById(idUser: number): Observable<User> {
+    //let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
+    return this.httpClient.get<User>(this.apiUrl + 'users/user/' + idUser/*, { headers }*/);
+  }
+
+  updateUserInfo(): Observable<any> {
     return;
   }
-  getUser():Observable<any>{
-    return;
-  }
-  updateUserInfo():Observable<any>{
-    return;
-  }
-  deleteUser():Observable<any>{
+
+  deleteUser(): Observable<any> {
     return;
   }
 
