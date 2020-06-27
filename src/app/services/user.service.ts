@@ -10,9 +10,9 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
 
-  apiUrl = 'http://localhost:3000/';
-  user: User;
-  token: string;
+  private apiUrl = 'http://localhost:3000/';
+  private user: User;
+  private token: string;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -52,7 +52,7 @@ export class UserService {
       let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
       return this.httpClient.get(this.apiUrl + 'users/user', { headers }).pipe(map(res=><User>res));
     }*/
-    
+
   getUserById(idUser: number): Observable<User> {
     //let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
     return this.httpClient.get<User>(this.apiUrl + 'users/user/' + idUser/*, { headers }*/);
