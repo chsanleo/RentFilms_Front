@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { User } from '../models/user.model';
-import { UserLogin } from '../models/userLogin.model';
+import { Observable, throwError } from 'rxjs';
+import { IUser } from '../models/iuser.model';
+import { IUserLogin } from '../models/iuserLogin.model';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -11,36 +11,40 @@ import { map } from 'rxjs/operators';
 export class UserService {
 
   private apiUrl = 'http://localhost:3000/';
-  private user: User;
+  private user: IUser;
   private token: string;
 
   constructor(private httpClient: HttpClient) { }
 
   //GETTERS
-  getUser(){
+  getUser() {
     return this.user;
   }
-  getToken(){
+  getToken() {
     return this.token;
   }
 
   //SETTERS
 
-
   //METHODS
-  signIn(userSignIn: User): Observable<any> {
+  signIn(userSignIn: IUser): Observable<any> {
     return this.httpClient.post(this.apiUrl + 'main/signin', userSignIn);
   }
 
-  logIn(userforLogin: User) {
+  logIn(email: string, pwd: string) {
     //recoger el token //REVISAR
-    let data = this.httpClient.post<UserLogin>(this.apiUrl + 'main/login', userforLogin)
-      .pipe(map(res => <UserLogin>res));
+    let body = { email: email, password: pwd };
+    this.httpClient.post<IUserLogin>(this.apiUrl + 'main/login', body)
+      .subscribe({
+        next: data => {
+          this.token = data.token,//NO HACE INSERT en token
+          this.user = data.user
+        },
+        error: error => console.log(error)
+      });
 
-    localStorage.setItem('token', data['token']);
-
-    this.token = data['token'];
-    this.user = data['user'];
+    console.log(this.getToken());//undefined
+    localStorage.setItem('token', this.getToken());
   }
 
   logOut(): Observable<any> {
@@ -53,9 +57,9 @@ export class UserService {
       return this.httpClient.get(this.apiUrl + 'users/user', { headers }).pipe(map(res=><User>res));
     }*/
 
-  getUserById(idUser: number): Observable<User> {
+  getUserById(idUser: number): Observable<IUser> {
     //let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
-    return this.httpClient.get<User>(this.apiUrl + 'users/user/' + idUser/*, { headers }*/);
+    return this.httpClient.get<IUser>(this.apiUrl + 'users/user/' + idUser/*, { headers }*/);
   }
 
   updateUserInfo(): Observable<any> {
