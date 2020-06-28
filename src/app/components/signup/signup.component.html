@@ -1,1 +1,16 @@
-<p>signup works!</p>
+<div class="signin">
+    <form class="custom-form" method="post">
+      <h1>Sing In</h1>
+      <input type="text" [(ngModel)]="name" name="name" placeholder="Name"
+        required="required"/>
+      <input type="email" [(ngModel)]="email" name="email" placeholder="Email"
+        required="required"/>
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Password"
+        required="required"/>
+        <input type="password" [(ngModel)]="password2" name="password2" placeholder=" Repeat Password"
+        required="required"/>
+        <input type="text" [(ngModel)]="address" name="address" placeholder="Address"
+        required="required"/>
+      <button type="submit" (click)="signIn()">Register in out App</button>
+    </form>
+  </div>
