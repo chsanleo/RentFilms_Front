@@ -16,16 +16,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     //this.UserService.getCurrentUser();
     this.UserService.getUserById(2)
-    .subscribe(
-      res => {
-        this.updateUserInfo(res)
-      },
-      error => console.log(error)
-    );
+      .subscribe(
+        res => this.updateUserInfo(res),
+        error => console.log(error)
+      );
   }
-  
+
   updateUserInfo(data: IUser) {
     this.user = data;
-    console.log(this.user);
   }
 }

@@ -21,11 +21,17 @@ export class UserService {
     return this.user;
   }
   getToken() {
+    let lsToken = localStorage.getItem('token')
+
+    if (lsToken) { return lsToken; }
     return this.token;
   }
 
   //SETTERS
-
+  setToken(token: string) {
+    this.token = token;
+    localStorage.setItem('token', this.getToken());
+  }
 
   //METHODS
   signIn(name: string, email: string, password: string, address: string) {
@@ -44,37 +50,29 @@ export class UserService {
       });
   }
 
-  logIn(email: string, pwd: string) {
+  logIn(email: string, pwd: string): Observable<IUserLogin> {
     //recoger el token //REVISAR
     let body = {
       email: email,
       password: pwd
     };
 
-    this.httpClient.post<IUserLogin>(this.apiUrl + 'main/login', body)
-      .subscribe({
-        next: data => {
-          this.token = data.token,//NO HACE INSERT en token
-            this.user = data.user
-        },
-        error: error => console.log(error)
-      });
-
-    console.log(this.getToken());//undefined
-    localStorage.setItem('token', this.getToken());
+    return this.httpClient.post<IUserLogin>(this.apiUrl + 'main/login', body);
   }
 
   logOut(): Observable<any> {
-    let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
+    let headers = new HttpHeaders().set('authorization', this.getToken());
+    this.setToken('');
     return this.httpClient.get(this.apiUrl + 'main/logout', { headers });
+
   }
 
-  getCurrentUser(): Observable<IUser>{
+  getCurrentUser(): Observable<IUser> {
     let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
     return this.httpClient.get<IUser>(this.apiUrl + 'users/user', { headers });
   }
 
-  getUserById(idUser: number) : Observable<IUser>{
+  getUserById(idUser: number): Observable<IUser> {
     //let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
     return this.httpClient.get<IUser>(this.apiUrl + 'users/user/' + idUser/*, { headers }*/);
   }
