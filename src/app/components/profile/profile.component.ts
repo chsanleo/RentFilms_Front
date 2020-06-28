@@ -10,9 +10,22 @@ import { IUser } from 'src/app/models/iuser.model';
 export class ProfileComponent implements OnInit {
 
   user: IUser;
+
   constructor(private UserService: UserService) { }
 
   ngOnInit(): void {
-      this.user = this.UserService.getUser();
+    //this.UserService.getCurrentUser();
+    this.UserService.getUserById(2)
+    .subscribe(
+      res => {
+        this.updateUserInfo(res)
+      },
+      error => console.log(error)
+    );
+  }
+  
+  updateUserInfo(data: IUser) {
+    this.user = data;
+    console.log(this.user);
   }
 }

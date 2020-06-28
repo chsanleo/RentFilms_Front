@@ -68,19 +68,15 @@ export class UserService {
     let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
     return this.httpClient.get(this.apiUrl + 'main/logout', { headers });
   }
-  /*
-    getCurrentUser(): Observable<User> {
-      let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
-      return this.httpClient.get(this.apiUrl + 'users/user', { headers }).pipe(map(res=><User>res));
-    }*/
 
-  getUserById(idUser: number): Observable<IUser> {
-    //let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
-    return this.httpClient.get<IUser>(this.apiUrl + 'users/user/' + idUser/*, { headers }*/);
+  getCurrentUser(): Observable<IUser>{
+    let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
+    return this.httpClient.get<IUser>(this.apiUrl + 'users/user', { headers });
   }
 
-  updateUserInfo(): Observable<any> {
-    return;
+  getUserById(idUser: number) : Observable<IUser>{
+    //let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
+    return this.httpClient.get<IUser>(this.apiUrl + 'users/user/' + idUser/*, { headers }*/);
   }
 
   deleteUser(): Observable<any> {
