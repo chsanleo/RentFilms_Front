@@ -21,7 +21,10 @@ export class LoginComponent implements OnInit {
   login() {
     this.UserService.logIn(this.email, this.password)
       .subscribe(
-        res => this.updateToken(res.token),
+        res => {
+          this.updateToken(res.token),
+          this.updateUser(res.user)
+        },
         error => console.log(error)
     );
   }
@@ -29,5 +32,9 @@ export class LoginComponent implements OnInit {
   updateToken(res: string){
     this.UserService.setToken(res);
     console.log(res);
+  }
+
+  updateUser(user:IUser){
+    this.UserService.setUser(user);
   }
 }
