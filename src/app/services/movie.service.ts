@@ -33,18 +33,8 @@ export class MovieService {
 
   }
 
-  getMovieDetail(id: number) {
-    this.httpClient.get<Movie>(this.apiUrl + '/movies/' + id)
-      .subscribe(data => {
-        this.movieDetail.poster_path = data.poster_path,
-          this.movieDetail.idIMDB = data.idIMDB,
-          this.movieDetail.original_language = data.original_language,
-          this.movieDetail.original_title = data.original_title,
-          this.movieDetail.genre_id = data.genre_id,
-          this.movieDetail.title = data.title,
-          this.movieDetail.overview = data.overview,
-          this.movieDetail.release_date = data.release_date
-      });
+  getMovieDetail(id: number) : Observable<Movie>{
+    return this.httpClient.get<Movie>(this.apiUrl + '/movies/' + id);
   }
 
   getGender(id: number) {
