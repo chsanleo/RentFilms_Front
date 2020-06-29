@@ -17,11 +17,14 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   //GETTERS
-  getUser() {
+  getUser() : IUser{
+    let lsUser = localStorage.getItem('user')
+    
+    if(lsUser){return JSON.parse(lsUser);}//
     return this.user;
   }
   getToken() {
-    let lsToken = localStorage.getItem('token')
+    let lsToken = localStorage.getItem('token');
 
     if (lsToken) { return lsToken; }
     return this.token;
@@ -30,7 +33,12 @@ export class UserService {
   //SETTERS
   setToken(token: string) {
     this.token = token;
-    localStorage.setItem('token', this.getToken());
+    localStorage.setItem('token', this.token);
+  }
+
+  setUser(user:IUser){
+    this.user = user;
+    localStorage.setItem('user', JSON.stringify(this.user));
   }
 
   //METHODS
@@ -63,13 +71,9 @@ export class UserService {
   logOut(): Observable<any> {
     let headers = new HttpHeaders().set('authorization', this.getToken());
     this.setToken('');
+    localStorage.clear();
     return this.httpClient.get(this.apiUrl + 'main/logout', { headers });
 
-  }
-
-  getCurrentUser(): Observable<IUser> {
-    let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
-    return this.httpClient.get<IUser>(this.apiUrl + 'users/user', { headers });
   }
 
   getUserById(idUser: number): Observable<IUser> {
