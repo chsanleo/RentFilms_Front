@@ -1,4 +1,5 @@
-export interface Movie {
+export interface IMovie {
+    _id: string,
     poster_path: string,
     idIMDB: number,
     original_language: string,

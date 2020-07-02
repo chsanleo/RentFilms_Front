@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/services/movie.service';
-import { Movie } from 'src/app/models/movie.model';
+import { IMovie } from 'src/app/models/imovie.model';
 
 @Component({
   selector: 'app-movie-detail',
@@ -9,7 +9,7 @@ import { Movie } from 'src/app/models/movie.model';
 })
 export class MovieDetailComponent implements OnInit {
 
-  movieDetail:Movie;
+  movieDetail: IMovie;
 
   constructor(private MovieService : MovieService) { }
 
@@ -21,7 +21,7 @@ export class MovieDetailComponent implements OnInit {
     );
   }
 
-  private updateDataMovieDetail(movie:Movie){
+  private updateDataMovieDetail(movie:IMovie){
     this.movieDetail = movie;
    /* this.movieDetail.poster_path = movie.poster_path,
     this.movieDetail.idIMDB = movie.idIMDB,

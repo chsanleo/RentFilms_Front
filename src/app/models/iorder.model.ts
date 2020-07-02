@@ -1,5 +1,5 @@
-export interface Order{
-    MovieId:string,
-    UserID:number,
+export interface IOrder{
+    movieId:string,
+    userID:number,
     returnDate:Date
 }
