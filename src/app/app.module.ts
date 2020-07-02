@@ -11,6 +11,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { ErrorComponent } from './components/error/error.component';
+import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ErrorComponent } from './components/error/error.component';
     SignupComponent,
     ProfileComponent,
     MoviesComponent,
-    ErrorComponent
+    ErrorComponent,
+    MovieDetailComponent
   ],
   imports: [
     BrowserModule,
