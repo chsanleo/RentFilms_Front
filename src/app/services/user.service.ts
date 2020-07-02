@@ -42,16 +42,9 @@ export class UserService {
   }
 
   //METHODS
-  signIn(name: string, email: string, password: string, address: string) {
+  signIn(user:IUser) {
 
-    let body = {
-      name: name,
-      email: email,
-      password: password,
-      address: address
-    };
-
-    return this.httpClient.post(this.apiUrl + 'main/signin', body)
+    return this.httpClient.post(this.apiUrl + 'main/signin', user)
       .subscribe({
         next: data => console.log("todo OK"),
         error: error => console.log(error)

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { NgForm } from '@angular/forms';
+import { IUser } from 'src/app/models/iuser.model';
 
 @Component({
   selector: 'app-signup',
@@ -8,33 +10,40 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SignupComponent implements OnInit {
 
-  name: string;
-  email: string;
-  password: string;
-  password2: string;
-  address: string;
+  errorMsg:string; 
 
   constructor(private UserService: UserService) { }
+
+  //GETTER
+
+  //SETTER
+
 
   ngOnInit(): void {
   }
 
-  signIn() {
-    let error = this.validate();
+  signIn(signinForm: NgForm) {
+
+    const user: IUser = signinForm.value;
+
+    let error = this.validate(user);
+
     if (error) {
-      alert(error);
+      this.errorMsg = error;
+      setTimeout(() => this.errorMsg = '', 5000);
       return;
     }
-    this.UserService.signIn(this.name, this.email, this.password, this.address);
+
+    this.UserService.signIn(user);
   }
 
-  validate(): string {
+  private validate(user:IUser): string {
     let error = "";
     let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
 
-    if (this.password == this.password2) {
-      if (this.password.length < 8) {
+    if (user.password == user.password2) {
+      if (user.password.length < 8) {
         error += " The password must be longer than 8 characters. ";
       }
       //password contains symbol
@@ -44,7 +53,7 @@ export class SignupComponent implements OnInit {
       error += " The passwords doesn't mach. ";
     }
 
-    if (!this.email.match(regexp)) {
+    if (!user.email.match(regexp)) {
       error += " The email have a incorrect format. ";
     }
 

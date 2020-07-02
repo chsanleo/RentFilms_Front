@@ -1,16 +1,21 @@
-<div class="signin">
-    <form class="custom-form" method="post">
-      <h1>Sing In</h1>
-      <input type="text" [(ngModel)]="name" name="name" placeholder="Name"
-        required="required"/>
-      <input type="email" [(ngModel)]="email" name="email" placeholder="Email"
-        required="required"/>
-      <input type="password" [(ngModel)]="password" name="password" placeholder="Password"
-        required="required"/>
-        <input type="password" [(ngModel)]="password2" name="password2" placeholder=" Repeat Password"
-        required="required"/>
-        <input type="text" [(ngModel)]="address" name="address" placeholder="Address"
-        required="required"/>
-      <button type="submit" (click)="signIn()">Register in out App</button>
-    </form>
+<form class="signinForm" #signinForm="ngForm" (submit)="signIn(signinForm)">
+  <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="name" ngModel placeholder="Introduce your name">
   </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="email" ngModel placeholder="Introduce your email">
+  </div>
+  <div class="form-group">
+    <input type="password" name="password" ngModel class="form-control" required placeholder="Introduce your password"
+      id="exampleInputPassword1">
+  </div>
+  <div class="form-group">
+    <input type="password" name="password2" ngModel class="form-control" required placeholder="Repeat your password"
+      id="exampleInputPassword2">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="adress" ngModel placeholder="Introduce your address">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
