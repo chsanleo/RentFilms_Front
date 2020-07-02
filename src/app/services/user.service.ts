@@ -70,12 +70,10 @@ export class UserService {
   }
 
   getUserById(idUser: number): Observable<IUser> {
-    //let headers = new HttpHeaders().set('authorization', localStorage.getItem('token'));
-    return this.httpClient.get<IUser>(this.apiUrl + 'users/user/' + idUser/*, { headers }*/);
+    return this.httpClient.get<IUser>(this.apiUrl + 'users/user/' + idUser);
   }
 
   deleteUser(): Observable<any> {
     return;
   }
-
 }
