@@ -1,10 +1,11 @@
-<div class="login">
-    <form class="custom-form" method="post">
-      <h1>Login</h1>
-      <input type="email" [(ngModel)]="email" name="email" placeholder="Email"
-        required="required"/>
-      <input type="password" [(ngModel)]="password" name="password" placeholder="Password"
-        required="required"/>
-      <button type="submit" (click)="login()">Log in</button>
-    </form>
-  </div>
+  <form class="loginForm" #loginForm="ngForm" (submit)="login(loginForm)">
+    <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+    <div class="form-group">
+      <input type="text" class="form-control" name="email" ngModel placeholder="Introduce your email">
+    </div>
+    <div class="form-group">
+      <input type="password" name="password" ngModel class="form-control" required placeholder="Introduce your password"
+        id="exampleInputPassword1">
+    </div>
+    <button type="submit" class="btn btn-primary" >Log In!</button>
+  </form>

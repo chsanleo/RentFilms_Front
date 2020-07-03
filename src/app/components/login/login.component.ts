@@ -1,7 +1,8 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { IUser } from '../../models/iuser.model';
-import { IUserLogin } from 'src/app/models/iuserLogin.model';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,31 +11,60 @@ import { IUserLogin } from 'src/app/models/iuserLogin.model';
 })
 export class LoginComponent implements OnInit {
 
-  email: string;
-  password: string;
+  errorMsg: string;
 
-  constructor(private UserService: UserService) { }
+  constructor(private UserService: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  login() {
-    this.UserService.logIn(this.email, this.password)
+  login(loginForm: NgForm) {
+
+    
+    const user: IUser = loginForm.value;
+    //let errorValidate = this.validate(user);
+/*
+    if (errorValidate) {
+      this.errorMsg = errorValidate;
+      setTimeout(() => this.errorMsg = '', 5000);
+      return;
+    }*/
+
+    this.UserService.logIn(user)
       .subscribe(
         res => {
-          this.updateToken(res.token),
-          this.updateUser(res.user)
+          console.log("TOKEN" +res.token),
+          console.log("USER" +res.user),
+            this.updateToken(res.token),
+            this.updateUser(res.user)
         },
         error => console.log(error)
-    );
+      );
   }
 
-  updateToken(res: string){
+  updateToken(res: string) {
     this.UserService.setToken(res);
     console.log(res);
   }
 
-  updateUser(user:IUser){
+  updateUser(user: IUser) {
     this.UserService.setUser(user);
+    
+    setTimeout(() => {
+      this.router.navigate(['/']);
+    }, 1500);
+  }
+
+  private validate(user:IUser) {
+
+    let error: string;
+    let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+    if (!user.email.match(regexp)) {
+      error += " The email have a incorrect format. ";
+    }
+
+    return error;
+
   }
 }
