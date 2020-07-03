@@ -51,13 +51,12 @@ export class UserService {
       });
   }
 
-  logIn(email: string, pwd: string): Observable<IUserLogin> {
-    //recoger el token //REVISAR
-    let body = {
-      email: email,
-      password: pwd
-    };
+  logIn(user:IUser): Observable<IUserLogin> {
 
+    let body = {
+      email: user.email,
+      password: user.password
+    };
     return this.httpClient.post<IUserLogin>(this.apiUrl + 'main/login', body);
   }
 
