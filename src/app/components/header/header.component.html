@@ -7,7 +7,7 @@
 
     <div class="guestZone" *ngIf="!getUser()">
         <a routerLink="login">Login</a>
-        <a routerLink="register">Register</a>
+        <a routerLink="signup">Register</a>
     </div>
     <div class="userZone" *ngIf="getUser() as user">
         <a routerLink="profile">{{user.name || user.email}}</a>
