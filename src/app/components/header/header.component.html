@@ -1,1 +1,16 @@
-<p>header works!</p>
+<header>
+    <div class="movies">
+        <a routerLink="/">Movies</a>
+        <!-- <a routerLink="movies/popular">Popular Movies</a>
+        <a [routerLink]="['movies','top-rated']">Top rated Movies</a> -->
+    </div>
+
+    <div class="guestZone" *ngIf="!getUser()">
+        <a routerLink="login">Login</a>
+        <a routerLink="register">Register</a>
+    </div>
+    <div class="userZone" *ngIf="getUser() as user">
+        <a routerLink="profile">{{user.name || user.email}}</a>
+        <a (click)="logout()">Logout</a>
+    </div>
+</header>
