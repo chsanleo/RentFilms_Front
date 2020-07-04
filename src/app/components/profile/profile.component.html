@@ -5,6 +5,9 @@
     <p>Email : {{user.email}}</p>
     <p>Address : {{user.address}}</p>
 
+    <div *ngFor="let order of orders">
+        <p>{{order.movieTitle}}</p>
+    </div>
 
     <a routerLink="/" routerLinkActive="active-link">
         <button>Back to films</button>
