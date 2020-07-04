@@ -20,21 +20,19 @@ export class LoginComponent implements OnInit {
 
   login(loginForm: NgForm) {
 
-    
+
     const user: IUser = loginForm.value;
-    //let errorValidate = this.validate(user);
-/*
+    let errorValidate = this.validate(user);
+
     if (errorValidate) {
       this.errorMsg = errorValidate;
       setTimeout(() => this.errorMsg = '', 5000);
       return;
-    }*/
+    }
 
     this.UserService.logIn(user)
       .subscribe(
         res => {
-          console.log("TOKEN" +res.token),
-          console.log("USER" +res.user),
             this.updateToken(res.token),
             this.updateUser(res.user)
         },
@@ -49,22 +47,21 @@ export class LoginComponent implements OnInit {
 
   updateUser(user: IUser) {
     this.UserService.setUser(user);
-    
+
     setTimeout(() => {
       this.router.navigate(['/']);
     }, 1500);
   }
 
-  private validate(user:IUser) {
+  private validate(user: IUser) {
 
-    let error: string;
     let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
     if (!user.email.match(regexp)) {
-      error += " The email have a incorrect format. ";
+      return " The email have a incorrect format. ";
     }
 
-    return error;
+    return "";
 
   }
 }
