@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   }
 
   getUser(){
-    return this.UserService.getUser();
+    return this.UserService.getUserVar();
   }
   logout(){
     this.UserService.logOut();
