@@ -1,15 +1,17 @@
 <h1>Profile</h1>
 
 <div>
-    <p>Name : {{user.name}}</p>
+    <p>Nombre : {{user.name}}</p>
     <p>Email : {{user.email}}</p>
-    <p>Address : {{user.address}}</p>
+    <p>Direccion : {{user.address}}</p>
 
-    <div *ngFor="let order of orders">
-        <p>{{order.movieTitle}}</p>
+    <div *ngIf="orders">
+        <h3>Alquileres</h3>
+        <div *ngFor="let order of orders">
+            <p>{{order.movieTitle}}</p>
+        </div>
     </div>
-
     <a routerLink="/" routerLinkActive="active-link">
-        <button>Back to films</button>
+        <button class="btn btn-primary">Volver</button>
     </a>
 </div>
