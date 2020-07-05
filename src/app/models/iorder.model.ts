@@ -1,5 +1,5 @@
 export interface IOrder{
     movieId:string,
-    userID:number,
+    userId:number,
     returnDate:Date
 }
