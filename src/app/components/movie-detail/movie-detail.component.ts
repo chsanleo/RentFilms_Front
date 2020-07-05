@@ -10,26 +10,14 @@ import { IMovie } from 'src/app/models/imovie.model';
 export class MovieDetailComponent implements OnInit {
 
   movieDetail: IMovie;
+  private More:boolean;
 
   constructor(private MovieService : MovieService) { }
 
   ngOnInit(): void {
-    this.MovieService.getMovieDetail(4562)
-    .subscribe(
-      res => this.updateDataMovieDetail(res), 
-      error => console.log(error)
-    );
+    this.movieDetail = this.MovieService.getMovieDetailVar();
   }
 
-  private updateDataMovieDetail(movie:IMovie){
-    this.movieDetail = movie;
-   /* this.movieDetail.poster_path = movie.poster_path,
-    this.movieDetail.idIMDB = movie.idIMDB,
-    this.movieDetail.original_language = movie.original_language,
-    this.movieDetail.original_title = movie.original_title,
-    this.movieDetail.genre_id = movie.genre_id,
-    this.movieDetail.title = movie.title,
-    this.movieDetail.overview = movie.overview,
-    this.movieDetail.release_date = movie.release_date*/
-  }
+  changeMore(){this.More = !this.More;}
+  getMore(){return this.More;}
 }
