@@ -6,7 +6,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { ErrorComponent } from './components/error/error.component';
-
+import {SearchMoviesComponent} from './components/search-movies/search-movies.component';
 
 
 const routes: Routes = [
@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "profile", component: ProfileComponent },
   { path: "signup", component: SignupComponent },
+  { path: "search", component: SearchMoviesComponent },
   { path: "**", component: ErrorComponent },
 ];
 
