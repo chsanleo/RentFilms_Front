@@ -10,26 +10,23 @@ import { IOrderShow } from '../modelsShow/orderShow.model';
 })
 export class OrderService {
 
-  private apiUrl = 'http://localhost:3000/orders';
+  private apiUrl = 'http://localhost:3000/orders/';
 
   constructor(private httpClient: HttpClient) { }
 
-  addOrder(order: IOrder): Observable<any> {
-    return this.httpClient.post(this.apiUrl + '/', order);
-    //router.post('/', OrderController.addOrder);
+  addOrder(order: IOrder) {
+    return this.httpClient.post(this.apiUrl, order);
   }
 
   getOrder(id: number): Observable<IOrder> {
-    return this.httpClient.get<IOrder>(this.apiUrl + '/' + id);
-    //router.get('/:id', OrderController.getOrder);
-
+    return this.httpClient.get<IOrder>(this.apiUrl + id);
   }
+
   getOrdersByUser(): Observable<IOrderShow[]> {
-    return this.httpClient.get<IOrderShow[]>(this.apiUrl + '/user');
+    return this.httpClient.get<IOrderShow[]>(this.apiUrl + 'user');
   }///
 
   getAllOrder(): Observable<IOrder[]> {
     return this.httpClient.get<IOrder[]>(this.apiUrl + '/');
-    //router.get('/', OrderController.getAllOrder);
   }
 }
