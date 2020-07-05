@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private UserService: UserService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = this.UserService.getToken();
+    const token = this.UserService.getTokenVar();
     
     if (token === undefined) { return next.handle(request); }
 
