@@ -18,19 +18,20 @@ export class MovieService {
   constructor(private httpClient: HttpClient) { }
 
   //GETTERS
-  getPage() { return this.page; }
-  getMovie() { return this.movieDetail; }
-  getMoviesByTitle() { return this.moviesByTitle; }
+  getPageVar() { return this.page; }
+  getMovieVar() { return this.movieDetail; }
+  getMoviesByTitleVar() { return this.moviesByTitle; }
 
   //SETTERS
-  setPage(page: number) {
+  setPageVar(page: number) {
     this.page = page;
   }
+  setMovieDetailVar(movieDetail:IMovie){this.movieDetail = movieDetail;}
 
   //METHODS
-  getTrendingMovies(): Observable<any> {
+  getTrendingMovies(): Observable<IMovieExt[]> {
 
-    return this.httpClient.get(this.apiUrl + 'main/trending');
+    return this.httpClient.get<IMovieExt[]>(this.apiUrl + 'main/trending');
     // router.get('/trending/:id', MovieController.getTredingMovies);
 
   }
