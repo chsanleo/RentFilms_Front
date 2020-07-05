@@ -22,9 +22,9 @@ export class OrderService {
     return this.httpClient.get<IOrder>(this.apiUrl + id);
   }
 
-  getOrdersByUser(): Observable<IOrderShow[]> {
-    return this.httpClient.get<IOrderShow[]>(this.apiUrl + 'user');
-  }///
+  getOrdersByUser(idUser: number): Observable<IOrderShow[]> {
+    return this.httpClient.get<IOrderShow[]>(this.apiUrl + 'user/' + idUser);
+  }
 
   getAllOrder(): Observable<IOrder[]> {
     return this.httpClient.get<IOrder[]>(this.apiUrl + '/');
