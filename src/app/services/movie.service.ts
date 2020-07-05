@@ -30,17 +30,14 @@ export class MovieService {
   }
   setMovieDetailVar(movieDetail: IMovie) { this.movieDetail = movieDetail; }
 
+
   //METHODS
   getTrendingMovies(): Observable<IMovieExt[]> {
-
     return this.httpClient.get<IMovieExt[]>(this.apiUrl + 'main/trending');
-    // router.get('/trending/:id', MovieController.getTredingMovies);
-
   }
 
   getMovieDetail(id: number): Observable<IMovie> {
     let headers = new HttpHeaders().append('authorization', this.userService.getTokenVar());
-    //console.log(headers)
     return this.httpClient.get<IMovie>(this.apiUrl + 'movies/' + id, { headers });
   }
 
