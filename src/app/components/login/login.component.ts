@@ -41,12 +41,12 @@ export class LoginComponent implements OnInit {
   }
 
   updateToken(res: string) {
-    this.UserService.setToken(res);
+    this.UserService.setTokenVar(res);
     console.log(res);
   }
 
   updateUser(user: IUser) {
-    this.UserService.setUser(user);
+    this.UserService.setUserVar(user);
 
     setTimeout(() => {
       this.router.navigate(['/']);
@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit {
     if (!user.email.match(regexp)) {
       return " The email have a incorrect format. ";
     }
-
     return "";
 
   }

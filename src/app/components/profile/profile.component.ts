@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
     private MovieService: MovieService) { }
 
   ngOnInit(): void {
-    this.user = this.UserService.getUser();
+    this.user = this.UserService.getUserVar();
     this.OrderService.getOrdersByUser()
       .subscribe(
         res => this.UpdateHistoryOrder(res),
