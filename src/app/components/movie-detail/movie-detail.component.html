@@ -1,31 +1,31 @@
-<h1>Movie detail</h1>
+<h1>Detalles de la película,         {{message}}</h1>
 <div class="card">
     <div>
         <p><strong>Titulo :</strong> {{movieDetail.title}}
 
-        <img width="200" src="https://image.tmdb.org/t/p/w200/{{this.movieDetail.poster_path}}"
-            alt="poster">
+            <img width="200" src="https://image.tmdb.org/t/p/w200/{{this.movieDetail.poster_path}}" alt="poster">
         </p>
     </div>
-    <div>      
+    <div class="overview">
         <p><strong>Resumen :</strong> {{movieDetail.overview}}</p>
     </div>
 
     <div>
-        <div *ngIf="!getMore()" >
-            <a (click)="changeMore()"><h3>+</h3></a>
+        <div *ngIf="!getMore()"> <a (click)="changeMore()">
+                <h3>+ MAS INFO!</h3>
+            </a> </div>
+        <div *ngIf="getMore()"> <a (click)="changeMore()">
+                <h3>- MENOS INFO!</h3>
+            </a>
+
+            <p><strong>Idioma Original : </strong> {{movieDetail.original_language}}</p>
+            <p><strong>Titulo original :</strong> {{movieDetail.original_title}}</p>
+            <p><strong>Fecha de estreno : </strong> {{movieDetail.release_date}}</p>
         </div>
-        <div *ngIf="getMore()">
-            <a (click)="changeMore()"><h3>-</h3></a>
-        
-        <p><strong>Idioma Original : </strong> {{movieDetail.original_language}}</p>
-        <p><strong>Titulo original :</strong> {{movieDetail.original_title}}</p>
-        <p><strong>Fecha de estreno : </strong> {{movieDetail.release_date}}</p>
-    </div>
     </div>
 
-
+    <button class="btn btn-primary" (click)="orderRentFilm()">Alquilar!</button>
     <a routerLink="/" routerLinkActive="active-link">
-        <button>Volver a todas las peliculas</button>
+        <button class="btn btn-primary">Volver</button>
     </a>
 </div>

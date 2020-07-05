@@ -14,7 +14,7 @@ import { IOrderShow } from 'src/app/modelsShow/orderShow.model';
 export class ProfileComponent implements OnInit {
 
   user: IUser;
-  orders: IOrderShow[];
+  orders: /*IOrderShow[]*/any;
 
   constructor(
     private UserService: UserService, 
@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.UserService.getUserVar();
-    this.OrderService.getOrdersByUser()
+    this.OrderService.getOrdersByUser(this.user.id)
       .subscribe(
         res => {
           console.log(res),
@@ -32,10 +32,11 @@ export class ProfileComponent implements OnInit {
       );
   }
 
-  private UpdateHistoryOrder(orderDB: IOrderShow[]) {
-    if(orderDB){return;}
+  private UpdateHistoryOrder(orderDB: any) {
+    this.orders = [];
+
+    if(!orderDB){return;}
+
     this.orders.concat(orderDB);
-    console.log(orderDB)
-    //this.MovieService.getMovieById(orderDB._id)
   }
 }

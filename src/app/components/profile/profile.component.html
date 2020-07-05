@@ -1,17 +1,23 @@
 <h1>Profile</h1>
-
-<div>
-    <p>Nombre : {{user.name}}</p>
-    <p>Email : {{user.email}}</p>
-    <p>Direccion : {{user.address}}</p>
-
-    <div *ngIf="orders">
-        <h3>Alquileres</h3>
-        <div *ngFor="let order of orders">
-            <p>{{order.movieTitle}}</p>
+<div class="card">
+    <div>
+        <img width="200"
+            src="https://www.cmcaindia.org/wp-content/uploads/2015/11/default-profile-picture-gmail-2-300x217.png">
+    </div>
+    <div>
+        <p>Nombre : {{user.name}}</p>
+        <p>Email : {{user.email}}</p>
+        <p>Direccion : {{user.address}}</p>
+    </div>
+    <div>
+        <div *ngIf="orders">
+            <h3>Alquileres</h3>
+            <div *ngFor="let order of orders">
+                <p>1 {{order.createdAt}} - {{order.returnDate}}
+            </div>
         </div>
     </div>
-    <a routerLink="/" routerLinkActive="active-link">
-        <button class="btn btn-primary">Volver</button>
-    </a>
 </div>
+<a routerLink="/" routerLinkActive="active-link">
+    <button class="btn btn-primary">Volver</button>
+</a>
