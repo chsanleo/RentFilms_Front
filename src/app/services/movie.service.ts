@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IMovie } from '../models/imovie.model';
 import { IOrderShow } from '../modelsShow/orderShow.model';
 import { IMovieExt } from '../models/imovieEXT.model';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class MovieService {
   private movieDetail: IMovie;
   private moviesByTitle: IMovie[];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private userService:UserService) { }
 
   //GETTERS
   getPageVar() { return this.page; }
@@ -37,7 +38,9 @@ export class MovieService {
   }
 
   getMovieDetail(id: number): Observable<IMovie> {
-    return this.httpClient.get<IMovie>(this.apiUrl + '/movies/' + id);
+    let headers = new HttpHeaders().append('authorization',this.userService.getTokenVar());
+   //console.log(headers)
+    return this.httpClient.get<IMovie>(this.apiUrl + 'movies/' + id, {headers});
   }
 
   getSomeMovies(movies: number[]) {
