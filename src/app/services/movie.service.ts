@@ -16,18 +16,19 @@ export class MovieService {
   private movieDetail: IMovie;
   private moviesByTitle: IMovie[];
 
-  constructor(private httpClient: HttpClient, private userService:UserService) { }
+  constructor(private httpClient: HttpClient, private userService: UserService) { }
 
   //GETTERS
   getPageVar() { return this.page; }
   getMovieVar() { return this.movieDetail; }
   getMoviesByTitleVar() { return this.moviesByTitle; }
+  getMovieDetailVar() { return this.movieDetail; }
 
   //SETTERS
   setPageVar(page: number) {
     this.page = page;
   }
-  setMovieDetailVar(movieDetail:IMovie){this.movieDetail = movieDetail;}
+  setMovieDetailVar(movieDetail: IMovie) { this.movieDetail = movieDetail; }
 
   //METHODS
   getTrendingMovies(): Observable<IMovieExt[]> {
@@ -38,9 +39,9 @@ export class MovieService {
   }
 
   getMovieDetail(id: number): Observable<IMovie> {
-    let headers = new HttpHeaders().append('authorization',this.userService.getTokenVar());
-   //console.log(headers)
-    return this.httpClient.get<IMovie>(this.apiUrl + 'movies/' + id, {headers});
+    let headers = new HttpHeaders().append('authorization', this.userService.getTokenVar());
+    //console.log(headers)
+    return this.httpClient.get<IMovie>(this.apiUrl + 'movies/' + id, { headers });
   }
 
   getSomeMovies(movies: number[]) {
