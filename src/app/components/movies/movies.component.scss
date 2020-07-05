@@ -1,0 +1,18 @@
+@import '../../themeColor.scss';
+
+.movies {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 2em;
+    .movie {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1em;
+        transition: all 0.5s;
+        cursor: pointer;
+        &:hover {
+            background-color: $shadow;
+        }
+    }
+}
