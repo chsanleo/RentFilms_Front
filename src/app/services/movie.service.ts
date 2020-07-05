@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IMovie } from '../models/imovie.model';
 import { IOrderShow } from '../modelsShow/orderShow.model';
+import { IMovieExt } from '../models/imovieEXT.model';
 
 @Injectable({
   providedIn: 'root'
