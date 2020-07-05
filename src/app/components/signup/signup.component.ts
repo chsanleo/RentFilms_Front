@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { NgForm } from '@angular/forms';
 import { IUser } from 'src/app/models/iuser.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,14 +11,9 @@ import { IUser } from 'src/app/models/iuser.model';
 })
 export class SignupComponent implements OnInit {
 
-  errorMsg:string; 
+  errorMsg: string;
 
-  constructor(private UserService: UserService) { }
-
-  //GETTER
-
-  //SETTER
-
+  constructor(private UserService: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -34,10 +30,20 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    this.UserService.signIn(user);
+    this.UserService.signIn(user)
+      .subscribe({
+        next: data => this.moveToNext(),
+        error: error => console.log(error)
+      });
   }
 
-  private validate(user:IUser): string {
+  private moveToNext(){
+    setTimeout(() => {
+      this.router.navigate(['/']);
+    }, 1500);
+  }
+
+  private validate(user: IUser): string {
     let error = "";
     let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
