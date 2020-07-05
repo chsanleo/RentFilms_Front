@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IUser } from '../models/iuser.model';
 import { IUserLogin } from '../models/iuserLogin.model';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -44,11 +43,7 @@ export class UserService {
   //METHODS
   signIn(user:IUser) {
 
-    return this.httpClient.post(this.apiUrl + 'main/signin', user)
-      .subscribe({
-        next: data => console.log("todo OK"),
-        error: error => console.log(error)
-      });
+    return this.httpClient.post(this.apiUrl + 'main/signin', user);
   }
 
   logIn(user:IUser): Observable<IUserLogin> {
