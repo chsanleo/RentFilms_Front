@@ -1,21 +1,31 @@
 <h1>Movie detail</h1>
-<div>
+<div class="card">
+    <div>
+        <p><strong>Titulo :</strong> {{movieDetail.title}}
 
-    this.movieDetail.poster_path = movie.poster_path
+        <img width="200" src="https://image.tmdb.org/t/p/w200/{{this.movieDetail.poster_path}}"
+            alt="poster">
+        </p>
+    </div>
+    <div>      
+        <p><strong>Resumen :</strong> {{movieDetail.overview}}</p>
+    </div>
 
-    <p>Titulo : {{movieDetail.title}}</p>
-    <p>Resumen : {{movieDetail.overview}}</p>
-
-    <p>More</p>
-    <p>Original Language : {{movieDetail.original_language}}</p>
-    <p>Original Title : {{movieDetail.original_title}}</p>
-    <p>Release Date : {{movieDetail.release_date}}</p>
-
+    <div>
+        <div *ngIf="!getMore()" >
+            <a (click)="changeMore()"><h3>+</h3></a>
+        </div>
+        <div *ngIf="getMore()">
+            <a (click)="changeMore()"><h3>-</h3></a>
+        
+        <p><strong>Idioma Original : </strong> {{movieDetail.original_language}}</p>
+        <p><strong>Titulo original :</strong> {{movieDetail.original_title}}</p>
+        <p><strong>Fecha de estreno : </strong> {{movieDetail.release_date}}</p>
+    </div>
+    </div>
 
 
     <a routerLink="/" routerLinkActive="active-link">
-        <button>Back to films</button>
+        <button>Volver a todas las peliculas</button>
     </a>
 </div>
-
-
