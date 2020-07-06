@@ -1,4 +1,4 @@
-# Backend, RentFilms
+# FrontEnd, RentFilms
 ![badge](https://img.shields.io/badge/working-active-brig)
 
 FrontEnd made with angular as an exercise to supply a previously developed back. 
