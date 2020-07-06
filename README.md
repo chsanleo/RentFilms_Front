@@ -75,10 +75,13 @@ $ ng serve
 + Implement search movie by actors.
 + Implement a guard.
 + Implement the update of user information.
-+ Implement the admin panel
++ Implement the admin panel.
++ Add new information to the objects.
 
 
 ## Test the application ⚙️
+
+(With the backend running)
 
 Turn on the server.
 ```
@@ -89,6 +92,8 @@ Use the browser you like best to access
 ```
 localhost:4200/
 ```
+
+And start to test the different buttons, links, ...
 
 ## Used Tools 🛠️
 
