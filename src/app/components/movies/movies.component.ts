@@ -11,17 +11,20 @@ import { Router } from '@angular/router';
 })
 export class MoviesComponent implements OnInit {
 
-  listOfMovies: IMovieExt[];
+  listOfMovies: any[];
 
   constructor(private MovieService: MovieService, private router: Router) { }
 
   ngOnInit(): void {
-    this.MovieService.getTrendingMovies()
-      .subscribe(
-        res => this.listOfMovies = res['results'],
-        error => console.error(error),
-        () => console.log(this.listOfMovies)
-      )
+    if (!this.listOfMovies) {
+      this.MovieService.getTrendingMovies()
+        .subscribe(
+          res => this.listOfMovies = res['results'],
+          error => console.error(error)
+        );
+    }else{
+      this.listOfMovies = this.MovieService.getMoviesByTitleVar();
+    }
   }
   goMovieDetail(movie: IMovieExt) {
     this.MovieService.getMovieDetail(movie.id)

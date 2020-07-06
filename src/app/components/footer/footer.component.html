@@ -1,35 +1,17 @@
-<!-- Footer -->
 <footer class="page-footer font-small special-color-dark pt-4">
-
-    <!-- Footer Elements -->
-    <div class="container">
-  
-      <!--Grid row-->
-      <div class="row">
-  
-        <!--Grid column-->
-        <div class="col-md-6 mb-4">
-  
-          <!-- Form -->
-          <form class="form-inline">
-            <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-              aria-label="Search">
-            <i class="fas fa-search" aria-hidden="true"></i>
-          </form>
-          <!-- Form -->
-  
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <!--<form class="form-inline" class="searchForm" name="search" #searchForm="ngForm" (submit)="search(searchForm)">
+          <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Buscar" aria-label="Buscar">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <button type="submit" class="btn btn-primary" >Busca!</button>
+        </form>-->
+        <input type="search" (keyup)="searchMovies($event.target.value)">
       </div>
-      <!--Grid row-->
-  
     </div>
-    <!-- Footer Elements -->
-  
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2020 Copyright:
-      <a href="https://github.com/chsanleo">Christian Sánchez León</a>
-    </div>
-    <!-- Copyright -->
-  
-  </footer>
-  <!-- Footer -->
+  </div>
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://github.com/chsanleo">Christian Sánchez León</a>
+  </div>
+</footer>

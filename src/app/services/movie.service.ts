@@ -28,6 +28,7 @@ export class MovieService {
   setPageVar(page: number) {
     this.page = page;
   }
+  setMovieByTitleVar(moviesTitle: IMovie[]) { this.moviesByTitle = moviesTitle; }
   setMovieDetailVar(movieDetail: IMovie) { this.movieDetail = movieDetail; }
 
 
