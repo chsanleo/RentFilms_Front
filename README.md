@@ -64,7 +64,7 @@ $ ng serve
 
 ### Roadmap 📋
 
-**About the back**
+**About the front**
 + Finish the search by title of the films in our database.
 + Fix the show data of the history of rents.
 + Fix problem with interceptor and token.
